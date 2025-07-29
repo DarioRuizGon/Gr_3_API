@@ -3,7 +3,7 @@ import os
 import pickle
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from xgboost import XGBClassifier
+from lightgbm import LGBMClassifier
 from sklearn.metrics import classification_report, balanced_accuracy_score
 import numpy as np
 
