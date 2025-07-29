@@ -28,17 +28,21 @@ def predict():
     so2 = request.args.get("so2", None)
     sulphates = request.args.get("sulphates", None)
 
-    X = [float(acidity), float(chlorides), float(so2), float(sulphates)]
+    X = [acidity, chlorides, so2, sulphates]
 
-    if len(X[X == None]) >= 2:
-        cont = input("La mitad o más de los valores son faltantes, si quieres continuar pulsa 's', si no 'n'").lower()
-        if cont == "s":
-            return prediction(X)
-        else:
-            return "Te faltaban muchos datos y has decidido no hacer una predicción"
-        
-    else:
-        return prediction(X)
+    def type_processing(X):
+        result = []
+        for n in X:
+            try:
+                value = float(n)
+            except:
+                value = None
+            result.append(value)
+        return result
+    
+    X = np.array(type_processing(X)).reshape(-1, 4)
+
+    return prediction(X)
 
 
 
