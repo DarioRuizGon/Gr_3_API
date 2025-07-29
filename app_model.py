@@ -19,7 +19,7 @@ def hello():
 
 @app.route("/api/v1/predict", methods = ["GET"])
 def predict():
-    with open("wine_model.pkl", "rb") as f:
+    with open("wine_model_2.pkl", "rb") as f:
         model = pickle.load(f)
 
     # def prediction(X):
