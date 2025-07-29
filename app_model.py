@@ -19,30 +19,38 @@ def predict():
     with open("wine_model.pkl", "rb") as f:
         model = pickle.load(f)
 
-    def prediction(X):
-        pred = model.predict(X)
-        return jsonify({f"prediction_{i}": pred[i].astype(np.int8) for i in range(len(X))})
+    # def prediction(X):
+    #     pred = model.predict(X)
+    #     return jsonify({f"prediction_{i}": pred[i].astype(np.int8) for i in range(len(X))})
 
     acidity = request.args.get("acidity", None)
     chlorides = request.args.get("chlorides", None)
     so2 = request.args.get("so2", None)
     sulphates = request.args.get("sulphates", None)
 
-    X = [acidity, chlorides, so2, sulphates]
-
-    def type_processing(X):
-        result = []
-        for n in X:
-            try:
-                value = float(n)
-            except:
-                value = None
-            result.append(value)
-        return result
+    if acidity is None or chlorides is None or so2 is None or sulphates is None:
+        return "Args empty, not enough data to predict"
+    else:
+        prediction = model.predict([[float(acidity),float(chlorides),float(so2), float(sulphates)]])
     
-    X = np.array(type_processing(X)).reshape(-1, 4)
+    return jsonify({'predictions': prediction[0]})
+    
 
-    return prediction(X)
+    # X = [acidity, chlorides, so2, sulphates]
+
+    # def type_processing(X):
+    #     result = []
+    #     for n in X:
+    #         try:
+    #             value = float(n)
+    #         except:
+    #             value = None
+    #         result.append(value)
+    #     return result
+    
+    # X = np.array(type_processing(X)).reshape(-1, 4)
+
+    # return prediction(X)
 
 
 
