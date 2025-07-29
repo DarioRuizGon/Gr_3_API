@@ -7,6 +7,9 @@ from lightgbm import LGBMClassifier
 from sklearn.metrics import classification_report, balanced_accuracy_score
 import numpy as np
 
+import warnings
+warnings.filterwarnings('ignore')
+
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
@@ -34,7 +37,7 @@ def predict():
         prediction = model.predict([[float(acidity),float(chlorides),float(so2), float(sulphates)]])
     
     return jsonify({'predictions': prediction[0]})
-    
+
 
     # X = [acidity, chlorides, so2, sulphates]
 
