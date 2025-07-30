@@ -58,7 +58,12 @@ def predict():
 
     def prediction(X):
         pred = model.predict(X)
-        return jsonify({'prediction': int(pred)})
+        pred = int(pred)
+        if pred == 0:
+            pred = "red"
+        else:
+            pred = "white"
+        return jsonify({'prediction': pred})
 
     X = [acidity, chlorides, so, sulphates]
 
