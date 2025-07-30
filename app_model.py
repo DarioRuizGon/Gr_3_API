@@ -32,7 +32,7 @@ def predict():
     so = request.args.get("so", None)
     sulphates = request.args.get("sulphates", None)
 
-    return request.args
+    return jsonify({"data": (acidity, type(acidity), chlorides, type(chlorides), so, type(so), sulphates, type(sulphates))})
 
     # if acidity is None or chlorides is None or so2 is None or sulphates is None:
     #     return "Args empty, not enough data to predict"
