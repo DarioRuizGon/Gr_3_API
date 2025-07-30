@@ -32,13 +32,15 @@ def predict():
     so = request.args.get("so", None)
     sulphates = request.args.get("sulphates", None)
 
-    return jsonify({"data": (acidity, chlorides, so, sulphates)})
+    
 
-    # if acidity is None or chlorides is None or so2 is None or sulphates is None:
-    #     return "Args empty, not enough data to predict"
-    # else:
-    #     X_pred = pd.DataFrame([[float(acidity),float(chlorides),float(so2), float(sulphates)]], columns = [f"Column_{i}" for i in range(4)])
-    #     prediction = model.predict(X_pred)
+    if acidity is None or chlorides is None or so is None or sulphates is None:
+        return "Args empty, not enough data to predict"
+    else:
+        X_pred = pd.DataFrame([[float(acidity),float(chlorides),float(so), float(sulphates)]], columns = [f"Column_{i}" for i in range(4)])
+        prediction = model.predict(X_pred)
+
+    return jsonify({"data": (acidity, chlorides, so, sulphates)})
     
     # return jsonify({'predictions': prediction[0]})
 
