@@ -34,7 +34,8 @@ def predict():
     if acidity is None or chlorides is None or so2 is None or sulphates is None:
         return "Args empty, not enough data to predict"
     else:
-        prediction = model.predict([[float(acidity),float(chlorides),float(so2), float(sulphates)]])
+        X_pred = pd.DataFrame([[float(acidity),float(chlorides),float(so2), float(sulphates)]], columns = [f"Column_{i}" for i in range(4)])
+        prediction = model.predict(X_pred)
     
     return jsonify({'predictions': prediction[0]})
 
