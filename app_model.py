@@ -22,9 +22,9 @@ def predict():
     with open("wine_model_2.pkl", "rb") as f:
         model = pickle.load(f)
 
-    # def prediction(X):
-    #     pred = model.predict(X)
-    #     return jsonify({f"prediction_{i}": pred[i].astype(np.int8) for i in range(len(X))})
+    def prediction(X):
+        pred = model.predict(X)
+        return jsonify({f"prediction_{i}": pred[i].astype(np.int8) for i in range(len(X))})
 
     
     acidity = request.args.get("acidity", None)
