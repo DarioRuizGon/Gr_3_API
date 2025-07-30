@@ -22,9 +22,9 @@ def predict():
     with open("wine_model_2.pkl", "rb") as f:
         model = pickle.load(f)
 
-    def prediction(X):
-        pred = model.predict(X)
-        return jsonify({f"prediction_{i}": pred[i].astype(np.int8) for i in range(len(X))})
+    # def prediction(X):
+    #     pred = model.predict(X)
+    #     return jsonify({f"prediction_{i}": pred[i].astype(int) for i in range(len(X))})
 
     
     acidity = request.args.get("acidity", None)
@@ -40,9 +40,9 @@ def predict():
         X_pred = pd.DataFrame([[float(acidity),float(chlorides),float(so), float(sulphates)]], columns = [f"Column_{i}" for i in range(4)])
         prediction = model.predict(X_pred)
 
-    return jsonify({"data": (float(acidity), float(chlorides), float(so), float(sulphates))})
+    #return jsonify({"data": (float(acidity), float(chlorides), float(so), float(sulphates))})
     
-    # return jsonify({'predictions': prediction[0]})
+    return jsonify({'predictions': prediction[0]})
 
 
     # X = [acidity, chlorides, so2, sulphates]
