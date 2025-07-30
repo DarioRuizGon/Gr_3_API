@@ -26,7 +26,7 @@ def predict():
     #     pred = model.predict(X)
     #     return jsonify({f"prediction_{i}": pred[i].astype(np.int8) for i in range(len(X))})
 
-    print(request.args)
+    return request.args
 
     # acidity = request.args.get("acidity", None)
     # chlorides = request.args.get("chlorides", None)
