@@ -57,8 +57,7 @@ def predict():
     sulphates = request.args.get('sulphates', None)
 
     def prediction(X):
-        pred = model.predict(X)
-        pred = int(pred)
+        pred = int(model.predict(X)[0])
         if pred == 0:
             pred = "red"
         else:
