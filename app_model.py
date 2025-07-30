@@ -58,7 +58,7 @@ def predict():
 
     def prediction(X):
         pred = model.predict(X)
-        return jsonify({f'prediction_{i}': int(pred[i]) for i in range(len(X))})
+        return jsonify({'prediction': int(pred)})
 
     X = [acidity, chlorides, so, sulphates]
 
