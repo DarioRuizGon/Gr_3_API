@@ -43,7 +43,7 @@ def predict():
 
     #return jsonify({'data': (float(acidity), float(chlorides), float(so), float(sulphates))})
     
-    return jsonify({'predictions': prediction[0]})
+    return jsonify({'prediction': int(prediction[0])})
 
 
     # X = [acidity, chlorides, so2, sulphates]
