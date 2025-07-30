@@ -10,8 +10,7 @@ import numpy as np
 
 import logging
 logging.basicConfig(level=logging.DEBUG)
-# import warnings
-# warnings.filterwarnings('ignore')
+
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
