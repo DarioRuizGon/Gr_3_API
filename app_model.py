@@ -7,8 +7,8 @@ from lightgbm import LGBMClassifier
 from sklearn.metrics import classification_report, balanced_accuracy_score
 import numpy as np
 
-import warnings
-warnings.filterwarnings('ignore')
+# import warnings
+# warnings.filterwarnings('ignore')
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -60,5 +60,7 @@ def predict():
 
     # return prediction(X)
 
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
