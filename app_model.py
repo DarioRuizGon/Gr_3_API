@@ -19,7 +19,7 @@ def hello():
 
 @app.route("/api/v1/predict", methods = ["GET"])
 def predict():
-    with open("wine_model_2.pkl", "rb") as f:
+    with open("wine_model_3.pkl", "rb") as f:
         model = pickle.load(f)
 
     # def prediction(X):
@@ -37,7 +37,7 @@ def predict():
     if acidity is None or chlorides is None or so is None or sulphates is None:
         return "Args empty, not enough data to predict"
     else:
-        X_pred = pd.DataFrame([[float(acidity),float(chlorides),float(so), float(sulphates)]], columns = [f"Column_{i}" for i in range(4)])
+        X_pred = [[float(acidity),float(chlorides),float(so), float(sulphates)]]
         prediction = model.predict(X_pred)
 
     #return jsonify({"data": (float(acidity), float(chlorides), float(so), float(sulphates))})
