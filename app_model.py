@@ -27,12 +27,12 @@ def predict():
     #     return jsonify({f"prediction_{i}": pred[i].astype(np.int8) for i in range(len(X))})
 
     
-    acidity = request.args.get("acidity", None)
-    chlorides = request.args.get("chlorides", None)
-    so = request.args.get("so", None)
-    sulphates = request.args.get("sulphates", None)
+    acidity = request.args.get("acidity")
+    chlorides = request.args.get("chlorides")
+    so = request.args.get("so")
+    sulphates = request.args.get("sulphates")
 
-    return jsonify({"data": (acidity, type(acidity), chlorides, type(chlorides), so, type(so), sulphates, type(sulphates))})
+    return jsonify({"data": (acidity, chlorides, so, sulphates)})
 
     # if acidity is None or chlorides is None or so2 is None or sulphates is None:
     #     return "Args empty, not enough data to predict"
