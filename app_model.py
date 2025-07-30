@@ -23,47 +23,58 @@ def hello():
     <p>Usa /api/v1/predict con los parámetros acidity, chlorides, so, sulphates</p>
     """
 
-@app.route('/api/v1/predict', methods = ['GET'])
-def predict():
-    model = joblib.load("my_model.joblib")
+# @app.route('/api/v1/predict', methods = ['GET'])
+# def predict():
+#     model = joblib.load("my_model.joblib")
 
-    # def prediction(X):
-    #     pred = model.predict(X)
-    #     return jsonify({f'prediction_{i}': pred[i].astype(int) for i in range(len(X))})
+        
+#     acidity = request.args.get('acidity', None)
+#     chlorides = request.args.get('chlorides', None)
+#     so = request.args.get('so', None)
+#     sulphates = request.args.get('sulphates', None)
 
     
+
+#     if acidity is None or chlorides is None or so is None or sulphates is None:
+#         return 'Args empty, not enough data to predict'
+#     else:
+#         prediction = model.predict([[float(acidity),float(chlorides),float(so), float(sulphates)]])
+
+
+    
+#     return jsonify({'prediction': int(prediction[0])})
+
+
+@app.route('/api/v1/predict', methods = ['GET'])
+def predict():
+
+    with open('wine_model.pkl', 'rb') as f:
+        model = pickle.load(f)
+
     acidity = request.args.get('acidity', None)
     chlorides = request.args.get('chlorides', None)
     so = request.args.get('so', None)
     sulphates = request.args.get('sulphates', None)
 
+    def prediction(X):
+        pred = model.predict(X)
+        return jsonify({f'prediction_{i}': int(pred[i]) for i in range(len(X))})
+
+    X = [acidity, chlorides, so, sulphates]
+
+    def type_processing(X):
+        result = []
+        for n in X:
+            try:
+                value = float(n)
+            except:
+                value = None
+            result.append(value)
+        return result
     
+    X = np.array(type_processing(X)).reshape(-1, 4)
 
-    if acidity is None or chlorides is None or so is None or sulphates is None:
-        return 'Args empty, not enough data to predict'
-    else:
-        prediction = model.predict([[float(acidity),float(chlorides),float(so), float(sulphates)]])
-
-    #return jsonify({'data': (float(acidity), float(chlorides), float(so), float(sulphates))})
-    
-    return jsonify({'prediction': int(prediction[0])})
-
-
-    # X = [acidity, chlorides, so2, sulphates]
-
-    # def type_processing(X):
-    #     result = []
-    #     for n in X:
-    #         try:
-    #             value = float(n)
-    #         except:
-    #             value = None
-    #         result.append(value)
-    #     return result
-    
-    # X = np.array(type_processing(X)).reshape(-1, 4)
-
-    # return prediction(X)
+    return prediction(X)
 
 if __name__ == '__main__':
     app.run(debug=True)
