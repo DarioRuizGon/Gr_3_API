@@ -7,6 +7,8 @@ from lightgbm import LGBMClassifier
 from sklearn.metrics import classification_report, balanced_accuracy_score
 import numpy as np
 
+import logging
+logging.basicConfig(level=logging.DEBUG)
 # import warnings
 # warnings.filterwarnings('ignore')
 
