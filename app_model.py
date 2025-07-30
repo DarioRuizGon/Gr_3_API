@@ -40,7 +40,7 @@ def predict():
         X_pred = pd.DataFrame([[float(acidity),float(chlorides),float(so), float(sulphates)]], columns = [f"Column_{i}" for i in range(4)])
         prediction = model.predict(X_pred)
 
-    return jsonify({"data": (acidity, chlorides, so, sulphates)})
+    return jsonify({"data": (float(acidity), float(chlorides), float(so), float(sulphates))})
     
     # return jsonify({'predictions': prediction[0]})
 
