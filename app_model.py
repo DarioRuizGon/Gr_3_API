@@ -18,7 +18,10 @@ app.config['DEBUG'] = True
 
 @app.route('/', methods = ['GET'])
 def hello():
-    return '<h1>API de predicciones sobre el color de un vino</h1>'
+    return """
+    <h1>API de predicciones sobre el color de un vino</h1>
+    <p>Usa /api/v1/predict con los parámetros acidity, chlorides, so, sulphates</p>
+    """
 
 @app.route('/api/v1/predict', methods = ['GET'])
 def predict():
