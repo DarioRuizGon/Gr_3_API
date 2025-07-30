@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 import os
 import pickle
+import joblib
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from lightgbm import LGBMClassifier
@@ -21,8 +22,7 @@ def hello():
 
 @app.route('/api/v1/predict', methods = ['GET'])
 def predict():
-    with open('wine_model_3.pkl', 'rb') as f:
-        model = pickle.load(f)
+    model = joblib.load("my_model.joblib")
 
     # def prediction(X):
     #     pred = model.predict(X)
