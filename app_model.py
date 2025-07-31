@@ -19,7 +19,7 @@ app.config['DEBUG'] = True
 def hello():
     return """
     <h1>API de predicciones sobre el color de un vino</h1>
-    <p>Usa /api/v1/predict con los parámetros acidity, chlorides, so, sulphates</p>
+    <p>Usa /api/v1/predict con los parámetros acidity ('volatile acidity'), chlorides, so2 ('total sulfur dioxide'), sulphates</p>
     """
 
 @app.route('/api/v1/predict', methods = ['GET'])
@@ -29,15 +29,15 @@ def predict():
         
     acidity = request.args.get('acidity', None)
     chlorides = request.args.get('chlorides', None)
-    so = request.args.get('so', None)
+    so2 = request.args.get('so2', None)
     sulphates = request.args.get('sulphates', None)
 
     
 
-    if acidity is None or chlorides is None or so is None or sulphates is None:
+    if acidity is None or chlorides is None or so2 is None or sulphates is None:
         return 'Args empty, not enough data to predict'
     else:
-        prediction = model.predict([[float(acidity),float(chlorides),float(so), float(sulphates)]])
+        prediction = model.predict([[float(acidity),float(chlorides),float(so2), float(sulphates)]])
 
 
     
@@ -52,7 +52,7 @@ def predict():
 
 #     acidity = request.args.get('acidity', None)
 #     chlorides = request.args.get('chlorides', None)
-#     so = request.args.get('so', None)
+#     so2 = request.args.get('so2', None)
 #     sulphates = request.args.get('sulphates', None)
 
 #     def prediction(X):
@@ -60,7 +60,7 @@ def predict():
 #         mapping = {0: "red", 1: "white"}
 #         return jsonify({'prediction': mapping[pred]})
 
-#     X = [acidity, chlorides, so, sulphates]
+#     X = [acidity, chlorides, so2, sulphates]
 
 #     def type_processing(X):
 #         result = []
