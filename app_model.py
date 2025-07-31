@@ -35,7 +35,7 @@ def predict():
     
 
     if acidity is None or chlorides is None or so2 is None or sulphates is None:
-        return 'Args empty, not enough data to predict'
+        return 'Faltan argunmenos, por favor revisa tu petición'
     else:
         prediction = model.predict([[float(acidity),float(chlorides),float(so2), float(sulphates)]])
 
