@@ -19,11 +19,8 @@ app.config['DEBUG'] = True
 def hello():
     return """
     <h1>API de predicciones sobre el color de un vino</h1>
-    <p>Para hacer una predicción utiliza el endpoint '/api/v1/predict' con los siguientes:
-    - parámetros acidity ('volatile acidity')
-    - chlorides
-    - so2 ('total sulfur dioxide')
-    - sulphates</p>
+    <p>Para hacer una predicción utiliza el endpoint '/api/v1/predict' con los siguientes: 
+    parámetros acidity ('volatile acidity'); chlorides; so2 ('total sulfur dioxide'); sulphates</p>
     """
 
 # @app.route('/api/v1/predict', methods = ['GET'])
